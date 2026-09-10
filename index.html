@@ -100,21 +100,20 @@
     .nav-links button:hover,
     .nav-links button.active { color: var(--red); }
 
-    .nav-cta {
-      background: var(--green-wa);
-      color: var(--white) !important;
-      padding: .5rem 1.1rem;
-      border-radius: 6px;
-      font-weight: 700 !important;
-      font-size: .78rem !important;
-      letter-spacing: .03em;
-      transition: background .2s;
-      white-space: nowrap;
-    }
-    .nav-cta:hover { background: var(--green-dk); }
-
     .menu-btn { display: none; padding: .4rem; color: var(--gray-900); }
     .menu-btn:hover { color: var(--red); }
+    .language-switch {
+      display:flex; align-items:center; gap:.2rem;
+      padding:.25rem; border:1px solid var(--gray-200);
+      border-radius:999px; background:var(--gray-50);
+    }
+    .language-switch button {
+      min-width:36px; padding:.35rem .55rem; border-radius:999px;
+      font-size:.72rem; font-weight:800; letter-spacing:.05em;
+      color:var(--gray-500); transition:all .2s;
+    }
+    .language-switch button.active { background:var(--red); color:var(--white); }
+    .language-switch.mobile { display:none; margin:.9rem .75rem 0; align-self:flex-start; }
 
     #mobile-menu {
       display: none;
@@ -159,16 +158,17 @@
     @media (max-width: 767px) {
       .nav-links { display: none; }
       .menu-btn  { display: block; }
+      .language-switch.desktop { display:none; }
+      .language-switch.mobile { display:flex; }
     }
 
     /* ── HERO ────────────────────────────────────── */
     #page-inicio {
       position: relative;
       overflow: hidden;
-      background: var(--gray-50);
-      padding: 5rem 0 4rem;
+      background: var(--white);
+      padding: 0;
     }
-    @media (min-width: 1024px) { #page-inicio { padding: 7rem 0 6rem; } }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
     }
@@ -246,6 +246,47 @@
       font-size: .85rem; font-weight: 500; color: var(--gray-500);
     }
     .hero-trust span { display: flex; align-items: center; gap: .35rem; }
+    .hero-intro {
+      position:relative;
+      background:var(--white);
+      padding:0 0 4.5rem;
+      text-align:center;
+    }
+    .hero-intro .hero-content {
+      max-width:1280px;
+      margin:0 auto;
+      padding-top:3.75rem;
+    }
+    .hero-intro .hero-h1 {
+      font-size:clamp(1.45rem,2.5vw,2.35rem);
+      white-space:nowrap;
+      margin-bottom:1rem;
+    }
+    .hero-intro .hero-sub {
+      max-width:none;
+      margin:0 auto 1.9rem;
+      font-size:1.12rem;
+      white-space:nowrap;
+    }
+    .hero-intro .hero-trust { justify-content:center; }
+    .amazing-mark {
+      display:inline-flex; align-items:center; gap:.6rem;
+      background:var(--gray-900); color:var(--white);
+      padding:.7rem 1.35rem; border-radius:999px;
+      font-size:.78rem; font-weight:800; letter-spacing:.08em;
+      text-transform:uppercase; margin-bottom:1.6rem;
+      box-shadow:0 10px 24px rgba(17,24,39,.18);
+    }
+    @media (max-width:900px) {
+      .hero-intro .hero-sub { white-space:normal; }
+    }
+    @media (max-width:767px) {
+      .hero-intro { padding-bottom:3.25rem; }
+      .hero-intro .hero-content { padding-top:2.5rem; }
+      .hero-intro .hero-h1,
+      .hero-intro .hero-sub { white-space:normal; }
+      .hero-intro .hero-trust { flex-direction:column; align-items:center; gap:.65rem; }
+    }
 
     /* ── SLIDESHOW (estilo PowerPoint) ───────────── */
     .slideshow-wrap {
@@ -513,7 +554,7 @@
     .trust-item p  { font-size:.82rem; color:rgba(255,255,255,.7); }
 
     /* ── CONTACTO ────────────────────────────────── */
-    #page-contacto { padding:4rem 0; background:var(--white); text-align:center; }
+    #page-contacto { padding:4rem 0; background:var(--white); }
     .contact-name {
       font-size:clamp(2rem,5vw,3rem); font-weight:900;
       color:var(--red); letter-spacing:-.03em; margin-bottom:.4rem;
@@ -529,8 +570,8 @@
       letter-spacing:.08em; text-transform:uppercase; margin-bottom:2.5rem;
     }
     .contact-items {
-      display:flex; flex-direction:column; align-items:center;
-      gap:1rem; max-width:420px; margin:0 auto 2rem;
+      display:flex; flex-direction:column; align-items:stretch;
+      gap:1rem; margin:0;
     }
     .contact-item {
       display:flex; align-items:center; gap:1rem; width:100%;
@@ -563,6 +604,23 @@
       margin-top:.5rem; display:inline-flex; align-items:center;
       gap:.5rem; font-size:.9rem; color:var(--gray-500); font-weight:500;
     }
+    .contact-layout { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(2rem,5vw,5rem); align-items:start; max-width:1080px; margin:0 auto; }
+    .contact-column h2, .contact-form-card h2 { font-size:clamp(1.55rem,3vw,2.15rem); line-height:1.1; letter-spacing:-.025em; margin-bottom:.65rem; color:var(--gray-900); }
+    .contact-intro { color:var(--gray-500); line-height:1.65; margin-bottom:1.5rem; }
+    .contact-column { text-align:left; padding-top:clamp(1.4rem,3vw,2.25rem); }
+    .contact-form-card { text-align:left; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:18px; padding:clamp(1.4rem,3vw,2.25rem); box-shadow:var(--shadow-md); }
+    .contact-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+    .form-field { display:flex; flex-direction:column; gap:.45rem; }
+    .form-field.full { grid-column:1 / -1; }
+    .form-field label { font-size:.78rem; font-weight:800; color:var(--gray-900); }
+    .form-field input, .form-field select, .form-field textarea { width:100%; min-height:48px; border:1px solid var(--gray-200); border-radius:9px; background:var(--white); color:var(--gray-900); font:inherit; padding:.75rem .85rem; outline:none; transition:border-color .2s, box-shadow .2s; }
+    .form-field textarea { min-height:130px; resize:vertical; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color:var(--red); box-shadow:0 0 0 3px rgba(220,38,38,.12); }
+    .contact-submit { grid-column:1 / -1; min-height:50px; border:0; border-radius:9px; cursor:pointer; background:var(--red); color:var(--white); font-weight:900; letter-spacing:.045em; transition:transform .2s, box-shadow .2s, background .2s; }
+    .contact-submit:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); background:#b91c1c; }
+    .form-note { grid-column:1 / -1; font-size:.76rem; color:var(--gray-500); line-height:1.5; }
+    @media (max-width:820px) { .contact-layout { grid-template-columns:1fr; } .contact-column { max-width:560px; width:100%; margin:0 auto; padding-top:0; } }
+    @media (max-width:560px) { .contact-form { grid-template-columns:1fr; } }
 
     /* ── CTA BAND ────────────────────────────────── */
     .cta-band {
@@ -651,9 +709,38 @@
       0%,100% { transform:translateY(0); }
       50%      { transform:translateY(-6px); }
     }
+    /* ── SHOWTIME: ILUMINACIÓN ESCÉNICA ─────────────── */
+    .led-frame { position:fixed; inset:0; pointer-events:none; z-index:9998; overflow:hidden; opacity:.7; }
+    .led-edge { position:absolute; display:block; filter:blur(.2px); }
+    .led-edge::after {
+      content:""; position:absolute; border-radius:999px;
+      background:linear-gradient(90deg,transparent,rgba(255,30,30,.35),#fff 48%,#ff1717 55%,transparent);
+      box-shadow:0 0 10px #ff2020,0 0 24px rgba(220,38,38,.9),0 0 46px rgba(220,38,38,.55);
+    }
+    .led-edge.top, .led-edge.bottom { left:0; width:100%; height:3px; }
+    .led-edge.top { top:0; } .led-edge.bottom { bottom:0; }
+    .led-edge.top::after, .led-edge.bottom::after { width:22vw; min-width:150px; height:100%; animation:led-horizontal 6s linear infinite; }
+    .led-edge.bottom::after { animation-direction:reverse; animation-delay:-3s; }
+    .led-edge.left, .led-edge.right { top:0; width:3px; height:100%; }
+    .led-edge.left { left:0; } .led-edge.right { right:0; }
+    .led-edge.left::after, .led-edge.right::after {
+      width:100%; height:22vh; min-height:130px;
+      background:linear-gradient(180deg,transparent,rgba(255,30,30,.35),#fff 48%,#ff1717 55%,transparent);
+      animation:led-vertical 6s linear infinite;
+    }
+    .led-edge.right::after { animation-direction:reverse; animation-delay:-3s; }
+    @keyframes led-horizontal { from { transform:translateX(-25vw); } to { transform:translateX(105vw); } }
+    @keyframes led-vertical { from { transform:translateY(-25vh); } to { transform:translateY(105vh); } }
+    @media (prefers-reduced-motion:reduce) {
+      .led-edge::after { animation:none !important; opacity:.45; }
+    }
   </style>
 </head>
 <body>
+<div class="led-frame" aria-hidden="true">
+  <i class="led-edge top"></i><i class="led-edge right"></i>
+  <i class="led-edge bottom"></i><i class="led-edge left"></i>
+</div>
 
 <!-- ═══════════════════ NAVBAR ═══════════════════ -->
 <nav id="navbar">
@@ -668,13 +755,11 @@
         <li><button onclick="showPage('servicios')"   data-page="servicios">Servicios</button></li>
         <li><button onclick="showPage('experiencias')" data-page="experiencias">Nuestro Trabajo</button></li>
         <li><button onclick="showPage('contacto')"    data-page="contacto">Contacto</button></li>
-        <li>
-          <a href="https://wa.me/18297305853?text=Hola%2C%20Visual%20Project.%20Me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n."
-             class="nav-cta" target="_blank" rel="noreferrer">
-            COTIZA POR WHATSAPP
-          </a>
-        </li>
       </ul>
+      <div class="language-switch desktop" aria-label="Seleccionar idioma">
+        <button type="button" class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      </div>
       <button class="menu-btn" id="menu-btn" aria-label="Menú">
         <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         <svg id="icon-x" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -686,6 +771,10 @@
       <button onclick="showPage('servicios');closeMenu()"   data-page="servicios">Servicios</button>
       <button onclick="showPage('experiencias');closeMenu()" data-page="experiencias">Nuestro Trabajo</button>
       <button onclick="showPage('contacto');closeMenu()"    data-page="contacto">Contacto</button>
+      <div class="language-switch mobile" aria-label="Seleccionar idioma">
+        <button type="button" class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      </div>
       <button class="nav-cta-mob"
         onclick="window.open('https://wa.me/18297305853?text=Hola%2C%20Visual%20Project.%20Me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n.','_blank');closeMenu()">
         COTIZAR POR WHATSAPP
@@ -696,39 +785,6 @@
 
 <!-- ═══════════════════ PAGE: INICIO ═══════════════════ -->
 <div id="page-inicio" class="page active">
-
-  <!-- HERO -->
-  <section style="position:relative;overflow:hidden;background:var(--gray-50);padding:5rem 0 4rem;">
-    <div class="hero-bg">
-      <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=2000&q=80" alt="Evento" />
-    </div>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge"><span class="dot"></span>Amazing Events · Audio · Video · Iluminación</div>
-        <h1 class="hero-h1">
-          Diseñamos experiencias audiovisuales que<br>
-          <em>transforman espacios.</em>
-        </h1>
-        <p class="hero-sub">Tú imaginas la experiencia. Nosotros la hacemos realidad y la llevamos al siguiente nivel.</p>
-        <div class="hero-btns">
-          <a href="https://wa.me/18297305853?text=Hola%2C%20Visual%20Project.%20Necesito%20cotizar%20equipos%20para%20mi%20evento."
-             class="btn-primary" target="_blank" rel="noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            COTIZAR POR WHATSAPP
-          </a>
-        </div>
-        <div style="display:inline-flex;align-items:center;gap:.6rem;background:var(--gray-900);color:var(--white);padding:.6rem 1.2rem;border-radius:6px;font-size:.82rem;font-weight:800;letter-spacing:.06em;margin-bottom:1.5rem;text-transform:uppercase;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Amazing Events
-        </div><br>
-        <div class="hero-trust">
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Respuesta rápida</span>
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Equipos profesionales</span>
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Soluciones a la medida</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- SLIDESHOW -->
   <div class="slideshow-wrap" id="slideshow">
@@ -742,6 +798,27 @@
     <div class="slide-dots" id="slide-dots"></div>
     <div class="slide-progress" id="slide-progress"></div>
   </div>
+
+  <!-- MENSAJE PRINCIPAL DEBAJO DEL SLIDER -->
+  <section class="hero-intro">
+    <div class="container">
+      <div class="hero-content">
+        <div class="amazing-mark">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Amazing Events
+        </div>
+        <h1 class="hero-h1">
+          Diseñamos experiencias audiovisuales que <em>transforman espacios.</em>
+        </h1>
+        <p class="hero-sub">Tú imaginas la experiencia. Nosotros la hacemos realidad y la llevamos al siguiente nivel.</p>
+        <div class="hero-trust">
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Respuesta rápida</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Producción profesional</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Soluciones a la medida</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- TRUST BAR -->
   <div class="trust-bar">
@@ -1018,11 +1095,15 @@
 
 <!-- ═══════════════════ PAGE: CONTACTO ═══════════════════ -->
 <div id="page-contacto" class="page">
-  <section style="padding:5rem 0; background:var(--white); text-align:center;">
+  <section style="padding:5rem 0; background:var(--white);">
     <div class="container">
       <img id="contact-logo" class="contact-logo" alt="Visual Project">
-      <p class="contact-subtitle">Productos Audiovisual</p>
-      <div class="contact-items">
+      <p class="contact-subtitle" style="text-align:center;">Productos Audiovisual</p>
+      <div class="contact-layout">
+       <div class="contact-column">
+        <h2>Hablemos de tu evento</h2>
+        <p class="contact-intro">Puedes contactarnos directamente o completar el formulario.</p>
+        <div class="contact-items">
         <a href="tel:+18297305853" class="contact-item">
           <div class="ci-icon ci-phone">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1053,6 +1134,32 @@
           </div>
           <div class="ci-text"><span class="ci-label">Gmail</span>Visualproject01@gmail.com</div>
         </a>
+        </div>
+       </div>
+       <div class="contact-form-card">
+        <h2>Solicita información</h2>
+        <p class="contact-intro">Completa los datos y nos pondremos en contacto contigo.</p>
+        <form class="contact-form" action="https://formsubmit.co/Visualproject01@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nueva solicitud desde Visual Project">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+          <div class="form-field full"><label for="client-name">Nombre y Apellido</label><input id="client-name" name="Nombre y Apellido" type="text" autocomplete="name" required></div>
+          <div class="form-field full">
+            <label for="event-type">Tipo de evento</label>
+            <select id="event-type" name="Tipo de evento" required>
+              <option value="" selected disabled>Seleccione una opción</option>
+              <option>Celebración de Bodas</option><option>Cumpleaños adultos</option><option>Cumpleaños infantil</option>
+              <option>Fiesta de quinceaños</option><option>Eventos Corporativos</option><option>Eventos sociales</option>
+            </select>
+          </div>
+          <div class="form-field"><label for="client-phone">Número de contacto</label><input id="client-phone" name="Número de contacto" type="tel" autocomplete="tel" required></div>
+          <div class="form-field"><label for="client-email">Correo electrónico</label><input id="client-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="form-field full"><label for="event-date">Fecha de tu evento</label><input id="event-date" name="Fecha del evento" type="date" required></div>
+          <div class="form-field full"><label for="event-comment">Comentario</label><textarea id="event-comment" name="Comentario" placeholder="Cuéntanos brevemente lo que tienes en mente"></textarea></div>
+          <button class="contact-submit" type="submit">ENVIAR SOLICITUD</button>
+          <p class="form-note">Los campos indicados son obligatorios. Responderemos lo antes posible.</p>
+        </form>
+       </div>
       </div>
     </div>
   </section>
@@ -1119,6 +1226,130 @@
 </a>
 
 <script>
+/* ── IDIOMAS ES / EN ──────────────────────────────── */
+const I18N = {
+  "Visual Project – Audio · Video · Iluminación":"Visual Project – Audio · Video · Lighting",
+  "Inicio":"Home", "Nosotros":"About Us", "Servicios":"Services",
+  "Nuestro Trabajo":"Our Work", "Contacto":"Contact",
+  "COTIZAR POR WHATSAPP":"GET A WHATSAPP QUOTE",
+  "Amazing Events":"Amazing Events",
+  "Diseñamos experiencias audiovisuales que":"We design audiovisual experiences that",
+  "transforman espacios.":"transform spaces.",
+  "Tú imaginas la experiencia. Nosotros la hacemos realidad y la llevamos al siguiente nivel.":"You imagine the experience. We bring it to life and take it to the next level.",
+  "Respuesta rápida":"Fast response", "Producción profesional":"Professional production",
+  "Soluciones a la medida":"Tailored solutions",
+  "Equipos Profesionales":"Professional Equipment", "Marcas líderes del mercado":"Leading brands",
+  "Atención Personalizada":"Personalized Attention", "Asesoría experta":"Expert guidance",
+  "Montaje Técnico":"Technical Setup", "Soporte garantizado":"Reliable support",
+  "Cotizaciones Rápidas":"Fast Quotes", "Respuestas ágiles":"Quick replies",
+  "¿LISTO PARA COTIZAR TU EVENTO?":"READY TO PLAN YOUR EVENT?",
+  "Cuéntanos qué necesitas y nuestro equipo te ayudará a encontrar la solución audiovisual adecuada.":"Tell us what you need and our team will help you find the right audiovisual solution.",
+  "COTIZAR AHORA POR WHATSAPP":"GET A WHATSAPP QUOTE",
+  "Nuestra Historia":"Our Story", "De la universidad":"From university", "al":"to the", "mundo profesional":"professional world",
+  "\"Visual Project SRL nació de la visión de dos estudiantes que quisieron ofrecer servicios audiovisuales de calidad a la comunidad universitaria.\"":"\"Visual Project SRL was born from the vision of two students who wanted to provide high-quality audiovisual services to the university community.\"",
+  "Los inicios en la UASD":"Our beginnings at UASD",
+  "Comenzamos apoyando actividades académicas con proyectores, pantallas y sonido, ganando la confianza de la comunidad universitaria.":"We began supporting academic activities with projectors, screens, and sound, earning the trust of the university community.",
+  "Expansión a eventos sociales":"Expansion into social events",
+  "El entusiasmo nos llevó a bodas, aniversarios y celebraciones, descubriendo nuestra pasión por hacer brillar cada momento especial con sonido e iluminación profesional.":"Our enthusiasm led us to weddings, anniversaries, and celebrations, where we discovered our passion for making every special moment shine through professional sound and lighting.",
+  "El salto corporativo e institucional":"The corporate and institutional leap",
+  "Participamos en lanzamientos, conferencias y eventos de gran proyección. Hoy somos una empresa integral de producción audiovisual y estructural.":"We took part in launches, conferences, and major events. Today, we are a full-service audiovisual and structural production company.",
+  "Quiénes Somos":"Who We Are", "Misión":"Mission", "Visión":"Vision", "Valores":"Values",
+  "Combinar innovación, pasión y responsabilidad para hacer de cada evento una experiencia audiovisual inolvidable, superando las expectativas de nuestros clientes.":"To combine innovation, passion, and responsibility to make every event an unforgettable audiovisual experience that exceeds our clients’ expectations.",
+  "Ser la empresa de producción audiovisual y estructural líder en República Dominicana, reconocida por la calidad de nuestros equipos y la excelencia en el servicio.":"To be the leading audiovisual and structural production company in the Dominican Republic, recognized for the quality of our equipment and excellence of our service.",
+  "Innovación constante":"Constant innovation", "Pasión por la excelencia":"Passion for excellence",
+  "Responsabilidad y puntualidad":"Responsibility and punctuality", "Atención personalizada":"Personalized attention",
+  "Tipos de Eventos que Cubrimos":"Types of Events We Cover",
+  "Desde una íntima celebración hasta un gran concierto, tenemos la solución audiovisual perfecta.":"From an intimate celebration to a major concert, we have the right audiovisual solution.",
+  "Corporativos e Institucionales":"Corporate and Institutional", "Lanzamientos de productos":"Product launches",
+  "Conferencias y seminarios":"Conferences and seminars", "Ferias y exposiciones":"Trade fairs and exhibitions",
+  "Eventos gubernamentales":"Government events", "Actividades Sociales":"Social Events",
+  "Bodas y celebraciones":"Weddings and celebrations", "Cumpleaños y aniversarios":"Birthdays and anniversaries",
+  "Fiestas privadas":"Private parties", "Reuniones familiares":"Family gatherings",
+  "Entretenimiento y Cultura":"Entertainment and Culture", "Conciertos y festivales":"Concerts and festivals",
+  "Actividades culturales":"Cultural activities", "Eventos temáticos":"Themed events", "Navidad y Halloween":"Christmas and Halloween",
+  "COTIZAR MI EVENTO":"GET A QUOTE FOR MY EVENT",
+  "Más que equipos.":"More than equipment.", "Creamos soluciones.":"We create solutions.",
+  "Servicios integrales para que tu evento sea una experiencia inolvidable.":"Complete services to make your event an unforgettable experience.",
+  "Sonido Profesional":"Professional Sound", "Sistemas de amplificación adaptados a la acústica y tamaño de tu evento, garantizando claridad absoluta.":"Sound systems tailored to the acoustics and size of your event, ensuring exceptional clarity.",
+  "Pantallas y Proyección":"Screens and Projection", "Soluciones visuales de alto impacto con pantallas LED modulares y proyección de alta definición.":"High-impact visual solutions with modular LED screens and high-definition projection.",
+  "Iluminación Espectacular":"Spectacular Lighting", "Diseño de iluminación que transforma espacios, crea atmósferas y resalta momentos clave.":"Lighting design that transforms spaces, creates atmosphere, and highlights key moments.",
+  "Producción y Montaje":"Production and Setup", "Asesoría técnica, estructuras seguras y personal capacitado operando durante todo el evento.":"Technical guidance, safe structures, and trained personnel throughout the event.",
+  "COTIZAR SERVICIO":"GET A SERVICE QUOTE",
+  "Experiencias que cobran vida":"Experiences Brought to Life",
+  "No mostramos equipos. Mostramos lo que somos capaces de crear con ellos.":"We do not showcase equipment. We showcase what we can create with it.",
+  "VER MÁS EXPERIENCIAS":"VIEW MORE EXPERIENCES", "VER MENOS":"VIEW LESS",
+  "Tu evento puede ser nuestra próxima experiencia.":"Your event could be our next experience.",
+  "Cuéntanos tu idea y la llevaremos al próximo nivel.":"Tell us your idea and we will take it to the next level.",
+  "QUIERO UNA EXPERIENCIA COMO ESTA":"I WANT AN EXPERIENCE LIKE THIS",
+  "Eventos corporativos":"Corporate events", "Bodas":"Weddings", "Conciertos":"Concerts", "Celebraciones":"Celebrations",
+  "Lo que dicen nuestros clientes":"What Our Clients Say",
+  "\"Excelente servicio. Los equipos estaban en perfectas condiciones y el personal técnico resolvió todo de manera muy profesional. Recomendados para eventos corporativos.\"":"\"Excellent service. The equipment was in perfect condition, and the technical staff handled everything professionally. Highly recommended for corporate events.\"",
+  "[Nombre Cliente / Empresa]":"[Client / Company Name]", "Evento Corporativo":"Corporate Event",
+  "\"La iluminación transformó por completo nuestra boda. Entendieron exactamente lo que queríamos y el montaje fue impecable y puntual.\"":"\"The lighting completely transformed our wedding. They understood exactly what we wanted, and the setup was flawless and punctual.\"",
+  "[Nombre Cliente]":"[Client Name]", "Boda":"Wedding",
+  "*Aquí aparecerá próximamente la experiencia de nuestros clientes reales.":"*Real client experiences will appear here soon.",
+  "Productos Audiovisual":"Audiovisual Production", "Llamadas":"Phone", "Navegación":"Navigation",
+  "Hablemos de tu evento":"Let's talk about your event", "Puedes contactarnos directamente o completar el formulario.":"Contact us directly or complete the form.",
+  "Solicita información":"Request information", "Completa los datos y nos pondremos en contacto contigo.":"Complete the details and we will contact you.",
+  "Nombre y Apellido":"First and Last Name", "Tipo de evento":"Event type", "Seleccione una opción":"Select an option",
+  "Celebración de Bodas":"Wedding celebration", "Cumpleaños adultos":"Adult birthday", "Cumpleaños infantil":"Children's birthday",
+  "Fiesta de quinceaños":"Quinceañera", "Eventos Corporativos":"Corporate events", "Eventos sociales":"Social events",
+  "Número de contacto":"Contact number", "Correo electrónico":"Email address", "Fecha de tu evento":"Event date",
+  "Comentario":"Comments", "Cuéntanos brevemente lo que tienes en mente":"Tell us briefly what you have in mind",
+  "ENVIAR SOLICITUD":"SEND REQUEST", "Los campos indicados son obligatorios. Responderemos lo antes posible.":"The indicated fields are required. We will respond as soon as possible.",
+  "Diseñamos experiencias audiovisuales que transforman espacios, conectan con las personas y hacen que cada momento cobre vida.":"We design audiovisual experiences that transform spaces, connect with people, and bring every moment to life.",
+  "Santo Domingo, Rep. Dom.":"Santo Domingo, Dominican Republic",
+  "Términos de servicio":"Terms of Service", "Privacidad":"Privacy",
+  "Menú":"Menu", "Anterior":"Previous", "Siguiente":"Next", "Cerrar":"Close",
+  "Seleccionar idioma":"Select language", "Español":"Spanish",
+  "Imagen ampliada":"Enlarged image", "Experiencia audiovisual ampliada":"Enlarged audiovisual experience",
+  "Ampliar Eventos corporativos":"Enlarge Corporate events", "Ampliar Bodas":"Enlarge Weddings",
+  "Ampliar Conciertos":"Enlarge Concerts", "Ampliar Celebraciones":"Enlarge Celebrations"
+};
+const I18N_REVERSE = Object.fromEntries(Object.entries(I18N).map(([es,en]) => [en,es]));
+let currentLanguage = 'es';
+
+function t(text, lang = currentLanguage) {
+  const es = I18N[text] ? text : (I18N_REVERSE[text] || text);
+  return lang === 'en' ? (I18N[es] || es) : es;
+}
+
+function applyLanguage(lang, save = true) {
+  currentLanguage = lang === 'en' ? 'en' : 'es';
+  document.documentElement.lang = currentLanguage;
+  document.title = t(document.title, currentLanguage);
+
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    if (node.parentElement && ['SCRIPT','STYLE'].includes(node.parentElement.tagName)) return;
+    const value = node.nodeValue.trim();
+    if (!value) return;
+    const translated = t(value, currentLanguage);
+    if (translated !== value) node.nodeValue = node.nodeValue.replace(value, translated);
+  });
+
+  document.querySelectorAll('[aria-label], [title], [placeholder]').forEach(el => {
+    ['aria-label','title','placeholder'].forEach(attr => {
+      if (el.hasAttribute(attr)) el.setAttribute(attr, t(el.getAttribute(attr), currentLanguage));
+    });
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLanguage));
+  const footerYear = document.getElementById('footer-year');
+  if (footerYear) footerYear.textContent = currentLanguage === 'en'
+    ? `© ${new Date().getFullYear()} Visual Project. All rights reserved.`
+    : `© ${new Date().getFullYear()} Visual Project. Todos los derechos reservados.`;
+  if (save) { try { localStorage.setItem('visual-project-language', currentLanguage); } catch (_) {} }
+}
+
+function initLanguage() {
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLanguage(btn.dataset.lang)));
+  let saved = 'es';
+  try { saved = localStorage.getItem('visual-project-language') || 'es'; } catch (_) {}
+  applyLanguage(saved, false);
+}
+
 /* ── DATA ──────────────────────────────────────────── */
 const WA = "18297305853";
 const waLink = msg => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
@@ -1158,7 +1389,10 @@ const ICONS = {
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const page = document.getElementById('page-' + id);
-  if (page) { page.classList.add('active'); window.scrollTo({top:0, behavior:'instant'}); }
+  if (page) {
+    page.classList.add('active');
+    window.scrollTo({top:0, behavior:'instant'});
+  }
   // update nav active state
   document.querySelectorAll('[data-page]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.page === id);
@@ -1372,7 +1606,7 @@ function initGallery() {
 
   moreBtn.addEventListener('click', () => {
     const expanded = grid.classList.toggle('expanded');
-    moreBtn.textContent = expanded ? 'VER MENOS' : 'VER MÁS EXPERIENCIAS';
+    moreBtn.textContent = t(expanded ? 'VER MENOS' : 'VER MÁS EXPERIENCIAS');
   });
 
   const closeLightbox = () => {
@@ -1394,6 +1628,7 @@ document.getElementById('contact-logo').src = document.querySelector('.nav-logo'
 initCarousel();
 initServices();
 initGallery();
+initLanguage();
 showPage('inicio');
 </script>
 </body>
